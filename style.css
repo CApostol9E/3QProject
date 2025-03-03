@@ -1,0 +1,65 @@
+body {
+    background-image: url(https://www.dccd.com/wp-content/uploads/2017/10/1-lrt2.jpg);
+    font-family: monospace;
+    background-size: cover;
+    background-attachment: fixed;
+    background-position: center;
+}
+
+h1 {
+    text-align: center;
+}
+
+mark { 
+  background-color: #212121;
+  color: #71dcde;
+}
+
+img {
+    max-width: 100%;
+    height: auto;
+    display: block;
+    margin: auto;
+}
+
+.container img {
+    width: 80%; 
+    max-width: 400px;
+}
+
+.container {
+    background-color: #8B0000;
+    color: white;
+}
+
+#center-button {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    gap: 15px;
+    flex-wrap: wrap;
+    margin-top: 20px;
+}
+
+button {
+    font-size: 18px;
+    padding: 10px 20px;
+}
+
+.table {
+    text-align: center;
+}
+
+
+.row img {
+    width: 100%;
+    max-width: 350px;
+    height: auto;
+}
+
+#container-for-references {
+    background-color: darkgrey;
+    color: black;
+    padding: 15px;
+    border-radius: 8px;
+}
