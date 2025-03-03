@@ -1,10 +1,10 @@
 <!DOCTYPE html>
 <html>
 <head>
-	<meta charset="utf-8">
-	<meta name="viewport" content="width=device-width, initial-scale=1">
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
 
-	<!-- SETUP BOOTSTRAP: link to Bootstrap -->
+    <!-- SETUP BOOTSTRAP: link to Bootstrap -->
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-QWTKZyjpPEjISv5WaRU9OFeRpok6YctnYmDr5pNlyT2bRjXh0JMhjY6hW+ALEwIH" crossorigin="anonymous">
 
     <!-- link to JS -->
@@ -18,10 +18,150 @@
 
     <!-- Font Effects -->
     <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Sofia&effect=neon|outline|emboss|shadow-multiple">
-	
-	<title></title>
+
+    <title>Train Fare Guide</title>
 </head>
 <body>
-Testing
+
+<body>
+
+    <nav class="navbar navbar-expand-lg bg-info sticky-top">
+        <div class="container-fluid">
+            <a class="navbar-brand">
+                <img src="http://www.pngmart.com/files/7/Train-Rail-PNG-HD.png" alt="Logo" style="width:40px;" class="rounded-pill">
+            </a>
+            <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav">
+                <span class="navbar-toggler-icon"></span>
+            </button>
+            <div class="collapse navbar-collapse" id="navbarNav">
+                <ul class="navbar-nav">
+                    <li class="nav-item">
+                        <a class="nav-link" href="index.html">Home</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="schedule.html">LRT 2 Schedule</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="contact.html">Contact Us</a>
+                    </li>  
+                    <form class="d-flex">
+                        <input class="form-control me-2" type="text" placeholder="Search">
+                        <button class="btn btn-primary" type="button">Search</button>
+                    </form>
+                </ul>
+            </div>
+        </div>
+    </nav>
+
+    <div class="container mt-5">
+        <br>
+        <h1><strong><mark class="dog">Fare Guide</mark></strong></h1>
+        <br>
+        <div>
+            <!-- Leaving From -->
+            <div class="mb-3">
+                <label class="form-label">Leaving from:</label>
+                <select id="leave" class="form-select">
+                    <option>Santolan</option>
+                    <option>Katipunan</option>
+                    <option>Anonas</option>
+                    <option>Araneta Center-Cubao</option>
+                    <option>Betty Go-Belmonte</option>
+                    <option>Gilmore</option>
+                    <option>J. Ruiz</option>
+                    <option>V. Mapa</option>
+                    <option>Pureza</option>
+                    <option>Legarda</option>
+                    <option>Recto</option>
+                </select>
+            </div>
+            <!-- Going to: -->
+            <div class="mb-3">
+                <label class="form-label">Going to:</label>
+                <select id="goTo" class="form-select">
+                    <option>Santolan</option>
+                    <option>Katipunan</option>
+                    <option>Anonas</option>
+                    <option>Araneta Center-Cubao</option>
+                    <option>Betty Go-Belmonte</option>
+                    <option>Gilmore</option>
+                    <option>J. Ruiz</option>
+                    <option>V. Mapa</option>
+                    <option>Pureza</option>
+                    <option>Legarda</option>
+                    <option>Recto</option>
+                </select>
+            </div>
+
+            <div class="row text-center">
+                <div class="col-md-4">
+                    <img src="https://www.urbanrail.net/as/manila/manila-metro-map.png" alt="Map" class="img-fluid rounded">
+                </div>
+                <div class="col-md-4">
+                    <img src="https://www.lrta.gov.ph/wp-content/uploads/2020/06/ticket3.jpg" alt="Ticket 1" class="img-fluid rounded">
+                </div>
+                <div class="col-md-4">
+                    <img src="https://www.lrta.gov.ph/wp-content/uploads/2020/06/ticket2.jpg" alt="Ticket 2" class="img-fluid rounded">
+            </div>
+
+            <div id="center-button">
+            <button type="button" class="btn btn-danger" onclick="calculateTicketPrice()" onmouseout="reset()" onmouseover="change()" id="color-change">Ticket Price</button>
+            <button type="button" class="btn btn-danger" onclick="calculateTicketPriceDiscounted()" onmouseout="reset()" onmouseover="change()">Ticket Price (PWD/Senior/Students)</button>
+            </div>
+
+            </div>
+        </div>
+        <p id="TicketPriceResult" class="mt-3">Your Price is:</p>
+        <br>
+    </div>
+
+    <script>
+        function getStationDistance(start, end) {
+            var stationNames = ["Santolan", "Katipunan", "Anonas", "Araneta Center-Cubao", "Betty Go-Belmonte", "Gilmore", "J. Ruiz", "V. Mapa", "Pureza", "Legarda", "Recto"];
+            var startIndex = stationNames.findIndex(station => station === start);
+            var endIndex = stationNames.findIndex(station => station === end);
+            return startIndex > endIndex ? startIndex - endIndex : endIndex - startIndex;
+        }
+
+        function calculateTicketPrice() {
+            var Low = 13;
+            var High = 28;
+            var stationCount = getStationDistance(document.getElementById("leave").value, document.getElementById("goTo").value);
+            var total = Low + (stationCount * 2);
+            if (total > High) {
+                total = High;
+            }
+            document.getElementById("TicketPriceResult").innerText = "Your Price is: Php " + total;
+        }
+
+        function calculateTicketPriceDiscounted() {
+            var discount = 0.80;
+            var Low = 13;
+            var High = 28;
+            var stationCount = getStationDistance(document.getElementById("leave").value, document.getElementById("goTo").value);
+            var total = Low + (stationCount * 2);
+            if (total > High) {
+                total = High;
+            }
+            total *= discount;
+            document.getElementById("TicketPriceResult").innerText = "Your Price is: Php " + total;
+        }
+    </script>
+
+<div id="container-for-references" class="container mt-5 p-3">
+<footer align="center">Caitlyn C. Apostol and James F. Mamauag| 9 Emerald</footer>
+<footer><strong><ins>References:</ins></strong><br>
+    <dl>
+        <dt>W3Schools</dt>
+        <dt><a href="https://www.lrta.gov.ph/lrt-2-operating-schedule/">Schedule</a></dt>
+        <dt><a href="https://www.lrta.gov.ph/tickets-and-fares/">Tickets and Fares</a></dt>
+        <dt><i>DISCLAIMER: This code was helped and developed with the assistance of ChatGPT, which provided in fixing the code. Not for making the entire code for us. And additionally, used this for brainstorming and learning as well.</i></dt>
+    </dl>
+</footer>
+</div>
+
+<br>
+
+
 </body>
 </html>
